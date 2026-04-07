@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Gerador de Imagens (Nano Banana 2)</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Gerador de Imagens (Nano Banana 2)</h1>
+
+      <form id="genForm" class="card">
+        <label class="field">
+          <span>Fotos (opcional, 1 ou mais)</span>
+          <input id="images" name="images" type="file" accept="image/*" multiple />
+        </label>
+
+        <div id="uploadsPreview" class="uploads-preview hidden" aria-label="Preview das imagens"></div>
+
+        <label class="field">
+          <span>Modelo</span>
+          <select id="model" name="model" required>
+            <option value="gemini:gemini-3.1-flash-image-preview" selected>Gemini 3.1 Flash Image (Nano Banana 2) — R$ 0,36/imagem (1K)</option>
+            <option value="openai:gpt-image-1.5-2025-12-16">OpenAI GPT Image 1.5 — R$ 0,21/imagem (1024, medium)</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Prompt</span>
+          <textarea id="prompt" name="prompt" rows="5" placeholder="Descreva o que o modelo deve gerar/editar" required></textarea>
+        </label>
+
+        <div class="row">
+          <button id="submitBtn" type="submit">Gerar</button>
+          <span id="status" class="status" aria-live="polite"></span>
+        </div>
+
+        <div class="cost">
+          <div>
+            <span class="cost__label">Custo (última):</span>
+            <span id="lastCost" class="cost__value">—</span>
+          </div>
+          <div>
+            <span class="cost__label">Modelo (última):</span>
+            <span id="lastModel" class="cost__value">—</span>
+          </div>
+          <div>
+            <span class="cost__label">Custo acumulado (servidor):</span>
+            <span id="totalCost" class="cost__value">—</span>
+            <span id="totalGen" class="cost__meta"></span>
+          </div>
+        </div>
+      </form>
+
+      <section id="result" class="card hidden">
+        <h2>Resultado</h2>
+        <img id="resultImg" alt="Imagem gerada" />
+        <div class="row">
+          <a id="downloadLink" download="resultado.png">Download</a>
+        </div>
+      </section>
+
+      <div id="lightbox" class="lightbox hidden" role="dialog" aria-modal="true" aria-label="Imagem ampliada">
+        <button id="lightboxClose" class="lightbox__close" type="button" aria-label="Fechar">×</button>
+        <img id="lightboxImg" class="lightbox__img" alt="" />
+      </div>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
